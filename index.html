@@ -1,0 +1,70 @@
+<html ng-app="liczsieci" ng-init="dupa = {imie: 'pulok', nazw:'test'};">
+    <head>
+        <title>LiczSieci</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        <script src="js/licz.js"></script>
+    </head>
+
+
+    <body>
+        <div ng-controller="ctrl1">
+            <span>LiczSieci kalkulator</span>
+          </br>
+            <form ng-submit="addIpAddress()">
+              <input type="text" size="2px" ng-model="ip1"/>.
+              <input type="text" size="2px" ng-model="ip2"/>.
+              <input type="text" size="2px" ng-model="ip3"/>.
+              <input type="text" size="2px" ng-model="ip4"/>/
+              <input type="text" size="2px" ng-model="mask"/>
+            </br>
+              <input type="submit" value="Ustaw IP">
+            </form>
+          </br>
+            {{completeIp}}
+
+          </br></br>
+            <span>HOSTY:</span></br>
+            <form ng-submit="addGroup()">
+              <input type="text" ng-model="enteredGroup">
+              <input type="submit" value="Dodaj grupe">
+            </form>
+          </br>
+          Chcecz przydzielic: {{currentHosts}} z {{maxAddr}} mozliwych adresow.
+          </br></br>
+
+            <table>
+              <tr>
+                <td></td>
+                <td><b>GRP</b></td>
+                <td><b>+2</b></td>
+                <td><b>/</b></td>
+                <td><b>2^x</b></td>
+                <td><b>SUB</b></td>
+                <td><b>mask</b></td>
+              </tr>
+              <tr ng-repeat="group in groups | orderBy:'-count'">
+                <td><a href="" ng-click="removeGroup(group)">[usun]</a></td>
+                <td>{{group.count}}</td>
+                <td>{{+group.count + 2}}</td>
+                <td>{{group.maxHosts}}</td>
+                <td>{{group.power}}</td>
+                <td>32-{{group.power}}</td>
+                <td>{{32 - +group.power}}</td>
+              </tr>
+            </table>
+          </br>
+            <button type="button" ng-click="liczgrupy()">Przlicz grupy</button>
+          </br></br>
+          <div ng-repeat="item in items">
+          </p>
+            <b>Grupa: {{item.nrGr}}</b></p>
+            Adres: {{item.adres[0]}}.{{item.adres[1]}}.{{item.adres[2]}}.{{item.adres[3]}} / {{item.maska}} </p>
+            Hosty: {{item.hostStart[0]}}.{{item.hostStart[1]}}.{{item.hostStart[2]}}.{{item.hostStart[3]}} -
+            {{item.hostEnd[0]}}.{{item.hostEnd[1]}}.{{item.hostEnd[2]}}.{{item.hostEnd[3]}} </p>
+            Broadcast: {{item.broadcast[0]}}.{{item.broadcast[1]}}.{{item.broadcast[2]}}.{{item.broadcast[3]}}
+          </div>
+        </div>
+
+    </body>
+
+</html>
